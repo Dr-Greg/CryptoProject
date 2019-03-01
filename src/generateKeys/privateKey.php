@@ -1,28 +1,35 @@
 <?php
 
+function isSuperIncreasing($privateKey)
+{
+    $result = array();
+    $total = 0;
+    $test = true;
+
+    foreach ($privateKey as $key) {
+        array_push($result, (int)$key);
+    }
+
+    foreach ($result as $key) {
+        if ($key < $total) {
+            $test = false;
+            break;
+        }
+        $total += $key;
+    }
+    return $result;
+}
+
 function createSecretKey()
 {
-    echo "For the secret key, please enter a number sequence separated by spaces, example: 1, 2, 5, 10, 20, 50\n";
+    echo "\nFor the secret key, please enter a number sequence separated by commas.\n\n";
+    echo "The sequence you enter must be superincresing.\nA sequence is called superincreasing if \nevery element of the sequence is greater \nthan the sum of all previous elements in the sequence. \n\nExemple : 1, 2, 5, 10, 20, 50 \n\n";
     $line = readline("Enter your list of number: ");
-    readline_add_history($line);
-    $privateKey = explode(",", $line);
-    $tmpValue = 0;
-    var_dump($privateKey);
-    foreach ($privateKey as $value) {
-        trim($value);
-        if (is_numeric($value) && $value > 0) {
-            echo $tmpValue;
-            if ($tmpValue < $value) {
-                $tmpValue += $value;
-                setEM($tmpValue);
-            } else {
-                echo "The sequence of numbers does not correspond to the rules of the supercrossing sequence\n";
-                createSecretKey();
-            }
-        } else
-            echo "Value is not a number\n";
-        createSecretKey();
-    }
+    $privateKey = explode(",", str_replace(" ", "", $line));
+    if (isSuperIncreasing($privateKey))
+        return $privateKey;
+    echo "Please enter only a super increasing numerical sequence.\n";
+    createSecretKey();
 }
 
 function setEM($tmpValue)
@@ -34,7 +41,7 @@ function setEM($tmpValue)
 
     trim($line);
 
-    if (is_numeric((Integer)$line) && $line > 1)
+    if (is_numeric((int)$line) && $line > 1)
         $em[0] = $line;
     else {
         echo "Value is not a number\n";
@@ -54,3 +61,5 @@ function setEM($tmpValue)
     }
     return $em;
 }
+
+createSecretKey();
