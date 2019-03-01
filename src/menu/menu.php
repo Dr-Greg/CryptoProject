@@ -7,9 +7,19 @@ function printMenu()
 ((    ||_// \\\// ||_//  ||   ((   ))    ||_// ||_// ((   ))    || ||==  ((     ||   
  \\\__ || \\\  //  ||     ||    \\\_//     ||    || \\\  \\\_//  |__|| ||___  \\\__  ||   \n\n";
     echo "***********************************************************************************\n\n";
-    echo "                      1 - Generate Public Key\n";
-    echo "                      2 - Encrypt a message\n";
-    echo "                      3 - Decrypt a message\n";
-    echo "                      4 - Quit\n\n";
+    echo "                      	1 - Generate Public Key\n";
+    echo "                      	2 - Encrypt a message\n";
+    echo "                      	3 - Decrypt a message\n";
+    echo "                      	4 - Quit\n\n";
+    echo "***********************************************************************************\n";
+}
+
+function printSecondaryMenu()
+{
+	echo "\n***********************************************************************************\n";
+    echo "                      	1 - Generate Public Key\n";
+    echo "                      	2 - Encrypt a message\n";
+    echo "                      	3 - Decrypt a message\n";
+    echo "                      	4 - Quit\n";
     echo "***********************************************************************************\n";
 }

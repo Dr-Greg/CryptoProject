@@ -37,40 +37,74 @@ function createSecretKey()
     createSecretKey();
 }
 
-function setEM($tmpValue)
+function setE()
 {
-    echo "Please enter two prime number between them E and M\n";
+    echo "\nPlease enter two prime number between them E and M\n";
     echo "E must be greater than 1 and smaller than M\n";
-    $line = readline("Enter your first number E: ");
+    readline_clear_history();
+    $line = readline("\nEnter your first number E: ");
+    $line = str_replace(" ", "", $line);
+    $line = (int)$line;
+
+    if (is_numeric($line) && $line > 1)
+        return $line;
+    else {
+        echo "\n***Value is not a number\n";
+        setE();
+    }
+}
+
+function setM($mLimit)
+{
+    echo "\nM must be greater than the sum of your secret sequence that is currently equal to " . strval($mLimit) . ".\n";
+    readline_clear_history();
+    $line = readline("\nEnter your second number M: ");
+    $line = str_replace(" ", "", $line);
+    $line = (int)$line;
+    if (is_numeric($line)) {
+        if ($line > $mLimit) {
+            if ($line / 1 == $line || $line / $line == 1)
+                return $line;
+            else
+                echo "\nYour number is not a prime number\n";
+                setM($mLimit);
+        } else {
+            echo "\n M can not be lower or equal to " . $mLimit . "\n";
+            setM($mLimit);
+        }
+    } else {
+        echo "\n***Value is not a number\n";
+        setM($mLimit);
+    }
+}
+
+function setEM($mLimit)
+{
+    echo "\nPlease enter two prime number between them E and M\n";
+    echo "E must be greater than 1 and smaller than M\n";
     $em = array();
+    $line = readline("\nEnter your first number E: ");
+    $line = str_replace(" ", "", $line);
+    $line = (int)$line;
 
-    trim($line);
-
-    if (is_numeric((int)$line) && $line > 1)
+    if (is_numeric($line) && $line > 1)
         $em[0] = $line;
     else {
-        echo "Value is not a number\n";
-        setEM($tmpValue);
+        echo "\n***Value is not a number\n";
+        setEM($mLimit);
     }
-    echo "M must be greater than the sum of your secret sequence that is currently equal to " . (int)$tmpValue . " .";
-    $line = readline("Enter your second number M: ");
-    trim($line);
-    if (is_numeric((int)$line) && $line > $tmpValue) {
+    echo "M must be greater than the sum of your secret sequence that is currently equal to " . strval($mLimit) . ".\n";
+    $line = readline("\nEnter your second number M: ");
+    $line = str_replace(" ", "", $line);
+    $line = (int)$line;
+    if (is_numeric($line) && $line > $mLimit) {
         if ($line / 1 == $line || $line / $line == 1)
             $em[1] = $line;
         else
             echo "Your number is not a prime number\n";
     } else {
         echo "Value is not a number\n";
-        setEM($tmpValue);
+        setEM($mLimit);
     }
     return $em;
 }
-
-$privateKey = createSecretKey();
-
-
-
-
-
-

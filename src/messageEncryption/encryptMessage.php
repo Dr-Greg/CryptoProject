@@ -66,8 +66,7 @@ function encryptMessage()
     echo "Message : " . _encryptMessage($publicKey, $blockLength, $explodedMessage);
     echo "Public Key : ";
     for ($i = 0; $i < count($publicKey); $i++) {
-        echo $publicKey[$i] . (($i + 1) >= count($publicKey) ? "\n\n" : ", ");
+        echo $publicKey[$i] . (($i + 1) >= count($publicKey) ? "\n" : ", ");
     }
+    echo "Number of bits : " . $blockLength . "\n\n";
 }
-
-//encryptMessage("PREPETNA", array(251, 255, 312, 412, 462, 492, 502, 510), 6);
