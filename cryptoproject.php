@@ -15,7 +15,11 @@ function generateKeys()
         $mLimit += $key;
     }
     $e = setE();
+    if ($e == -1)
+        return;
     $m = setM($mLimit);
+    if ($e == -1)
+        return;
     generatePublicKey($privateKey, $e, $m);
 }
 
@@ -39,6 +43,7 @@ function main()
                 encryptMessage();
                 break;
             case "3" :
+                messageDecryption();
                 break;
             case "4" :
                 echo "\nSee you next time. Bye !\n";

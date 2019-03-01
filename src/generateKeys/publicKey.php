@@ -29,7 +29,8 @@ function printRecapKey($privateKey, $E, $M, $publicKeyString, $permutationString
   $privateKeyString = implode(", ", $privateKey);
   echo "\n************************ Your part *****************************\n";
   echo "      Here is all the information about your secret key :       \n";
-  echo "      Your secret key is: " . $privateKeyString . "               ";
+  echo "      Your secret key is : " . $privateKeyString . "               \n";
+  echo "      The permutation is : " . $permutationString . "               ";
   echo "\n****************************************************************\n\n";
   echo "\nThe numbers you have chosen are: E = " . $E . " and M = " . $M . "  \n\n";
   echo "******************** The part to be shared *********************\n";

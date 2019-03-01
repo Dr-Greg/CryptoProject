@@ -1,7 +1,24 @@
 <?php
 
-function messageDecryption($message, $n) {
+function messageDecryption() {
+    $message = readline("Enter the message to decrypt : ");
+    $privateKey = readline("Enter your secret key : ");
+    $privateKey = explode(",", str_replace(" ", "", $privateKey));
+    $permutation = readline("Enter your permutation : ");
+    $permutation = explode(",", str_replace(" ", "", $permutation));
+    $E = readline("Enter your number E : ");
+    $M = readline("Enter your number M : ");
+    $N = readline("Enter the number N used for encrypt message : ");
 
+    $d = d($E, $M);
+    $newMessageEncrypt = decryptionPart1($message, $d, $M);
+    $privateKey2 = permutationSecretKey($privateKey, $permutation);
+    $messageDecryptionTerms = combineTerms($privateKey, $newMessageEncrypt);
+    $privateKeyToBinary = _secretKeyToBinary($privateKey2, $N);
+    $messageToBinary =_messageToBinary($messageDecryptionTerms, $privateKeyToBinary, $newMessageEncrypt, $N);
+    $decryptMessage = _binaryToText($messageToBinary);
+
+    echo "Here is our decrypted message : " . $decryptMessage . "\n";
 }
 
 function d($E, $M) {
@@ -65,7 +82,7 @@ function _messageToBinary($messageDecryptionTerms, $privateKeyToBinary, $newMess
     foreach ($newMessageEncrypt as $value) {
         $binary = "";
         for ($i = 0; $i < sizeof($messageDecryptionTerms[$value]); $i++) { 
-            $binary += $privateKeyToBinary[$messageDecryptionTerms[$value][$i]];
+            $binary += intval($privateKeyToBinary[$messageDecryptionTerms[$value][$i]]);
         }
         $binary = str_pad($binary, $n, "0", STR_PAD_LEFT);
         array_push($messageToBinary, $binary);

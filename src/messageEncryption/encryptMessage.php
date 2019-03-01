@@ -56,8 +56,13 @@ function encryptMessage()
 {
     $message = readline("Enter the message to encrypt : ");
     $userInputPublicKey = readline("Enter the public key of recipient : ");
-    $blockLength = readline("Now you have to enter a number beetwin 4 and 8: ");
     $publicKey = explode(",",trim($userInputPublicKey));
+    $blockLength = (int)readline("Now you have to enter the number N between 4 and 8: ");
+    if ($blockLength < 4 || $blockLength > 8) {
+        echo "\n *** An integer between 4 and 8 is expected. ***\n";
+        echo " ***             Please start again             ***\n\n";
+        return;
+    }
     $binMessage = _textToBinary($message);
     $explodedMessage = _explodeMessage($binMessage, $blockLength);
     echo "\nYour message has been encrypted.\n";
@@ -68,5 +73,5 @@ function encryptMessage()
     for ($i = 0; $i < count($publicKey); $i++) {
         echo $publicKey[$i] . (($i + 1) >= count($publicKey) ? "\n" : ", ");
     }
-    echo "Number of bits : " . $blockLength . "\n\n";
+    echo "Your number N : " . $blockLength . "\n\n";
 }
