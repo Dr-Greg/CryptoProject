@@ -56,7 +56,7 @@ function encryptMessage()
 {
     $message = readline("Enter the message to encrypt : ");
     $userInputPublicKey = readline("Enter the public key of recipient : ");
-    $blockLength = readline("Now you have to enter the special : ");
+    $blockLength = readline("Now you have to enter a number beetwin 4 and 8: ");
     $publicKey = explode(",",trim($userInputPublicKey));
     $binMessage = _textToBinary($message);
     $explodedMessage = _explodeMessage($binMessage, $blockLength);
